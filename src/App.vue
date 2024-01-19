@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import Menu from "./components/Menu.vue";
 import logoSrc from "./assets/img/logo.png";
 import FilterProducts from "./components/FilterProducts/FilterProducts.vue";
 import type { Product } from "./components/Product/ProductType";
+import ProductSkeleton from "./components/Product/ProductSkeleton.vue";
 
 const productsRef = ref<Product[]>([]);
 const logo = ref<string>(logoSrc);
@@ -24,6 +24,7 @@ onMounted(async () => {
     );
   }
 });
+
 </script>
 
 <template>
@@ -32,10 +33,18 @@ onMounted(async () => {
       <div class="md:flex gap-7">
         <div class="w-48">
           <img :src="logo" alt="Fitsupp Logo" class="w-full -mt-6 mb-2" />
-          <Menu />
         </div>
-        <router-view class="w-full" />
-        <FilterProducts v-if="productsRef.length > 0" :products="productsRef" />
+        <div>
+          <h1 style="color: var(--text-color)" class="m-0 mb-5">
+            Top Amazon Products: <br />Comparison of the main features.
+          </h1>
+          <FilterProducts :products="productsRef" v-if="productsRef.length > 0" />
+          <div class="mt-32" v-else>
+            <div class="p-4 w-full" v-for="(_, key) in new Array(10).fill({})" :key="key">
+              <ProductSkeleton />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

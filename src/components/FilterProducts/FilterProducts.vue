@@ -7,16 +7,15 @@ import useDisplayAttributes from "../../hooks/useDisplayAttributes";
 import FilteredProductList from "./FilteredProductList.vue";
 import type { Product } from "../Product/ProductType"
 
-const slug: string = "whey";
 const props = defineProps<{
   products: Product[],
 }>();
 
+const slug: string = "whey"; // should be slug in future
 const selectValue = ref({ name: "Whey", value: "whey" });
 const inputValue = ref([]);
 
 const { filteredProducts } = useProductFilter(props.products, 'whey', inputValue);
-
 const { suggestions, updateSuggestions } = useFilterSuggestions(
   slug,
   inputValue
@@ -42,9 +41,6 @@ watch(selectValue, (newValue, oldValue) => {
 
 <template>
   <div>
-    <h1 style="color: var(--text-color)" class="m-0 mb-5">
-      Top Amazon Products: <br />Comparison of the main features.
-    </h1>
     <div class="flex flex-col items-center mb-4 pb-4">
       <div class="flex flex-col items-center gap-4 mt-4 md:mt-0 md:flex-row justify-between md:items-start md:w-full">
         <AutoComplete placeholder="Filter Values" v-model="inputValue" dropdown multiple :suggestions="suggestions"

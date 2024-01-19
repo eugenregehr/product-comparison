@@ -9,10 +9,7 @@ export default function useProductFilter(
   filters: Ref<string[]>
 ) {
   const filteredProducts = computed(() => {
-    if (!category || !products || !Array.isArray(products)) return [];
-
     let result = products.filter((product) => product.category === category);
-
     const strategies =
       filterStrategies[category as keyof typeof filterStrategies];
 

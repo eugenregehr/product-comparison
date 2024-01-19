@@ -2,7 +2,7 @@
 import DataTable from 'primevue/datatable';
 import Dialog from 'primevue/dialog';
 import Column from 'primevue/column';
-import { productDetailBasics, productDetailAdvances } from '../../services/productListDetails';
+import { productDetailBasics, productDetailAdvances, ProductDetailListItem } from '../../services/productListDetails';
 import { ref, watch } from 'vue';
 import type { Product } from './ProductType';
 
@@ -12,8 +12,8 @@ const props = defineProps<{
     advanced: boolean
 }>()
 
-const visible = ref(false);
-const advancedDetails = ref([]);
+const visible = ref<boolean>(false);
+const advancedDetails = ref<ProductDetailListItem[]>([]);
 
 watch(props.product, (newVal) => {
     if (newVal && props.advanced) {

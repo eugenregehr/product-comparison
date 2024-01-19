@@ -11,7 +11,17 @@ export const productDetailBasics: Record<string, any> = {
   ],
 };
 
-export const productDetailAdvances: Record<string, any> = {
+export interface ProductDetailListItem {
+  title: string;
+  dimension: string;
+}
+
+export interface ProductDetailCategory {
+  title: string;
+  list: ProductDetailListItem[];
+}
+
+export const productDetailAdvances: Record<string, ProductDetailCategory> = {
   whey: {
     title: "Aminos / 100g",
     list: [
